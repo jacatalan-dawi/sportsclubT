@@ -1,6 +1,6 @@
 # docker/nginx/Dockerfile
 FROM nginx:stable-trixie
-EXPOSE 8000
+EXPOSE 80
 
 # COPY is relative to the context defined in the `docker-compose.yml` file,
 # i.e., the project root, not the Dockerfile location.
