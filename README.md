@@ -1696,181 +1696,17 @@ Fixtures will be made available as a set of files inside the `fixtures/` subdire
 
 ## Github Actions
 
-A minimal `.github/workflows/ci.yml` might look like this:
+GitHub Actions is a continuous integration and continuous delivery (CI/CD) platform that allows us to automate our build, test, and deployment workflows directly within GitHub. It enables creating automated processes that trigger when specific events occur in a repository, such as when someone opens a pull request, creates an issue, or pushes a commit.
 
-```yaml
-# .github/workflows/ci.yml
-name: CI
+Key components are:
 
-on:
-  push:
-    branches: [main, develop]
-  pull_request:
-    branches: [main, develop]
+* **Workflows**: Automated processes defined in YAML files stored in the `.github/workflows` directory of the repository that run one or more job.
+* **Events**: Activities that trigger workflows, like pull requests, issues, commits, or scheduled times.
+* **Jobs**: Sets of steps that execute on the same runner, which can run in parallel or sequentially.
+* **Actions**: Reusable code packages that perform specific tasks like pulling the repository, setting up build environments, or deploying to cloud providers.
+* **Runners**: Servers that execute workflows.
 
-env:
-  # Django
-  SECRET_KEY: secret
-  DEBUG: "False"
-  ALLOWED_HOSTS: localhost,127.0.0.1
-  # Database
-  POSTGRES_USER: sportsclub
-  POSTGRES_PASSWORD: sportsclub
-  POSTGRES_DB: sportsclub
-  POSTGRES_HOST: localhost
-  POSTGRES_PORT: 5432
-
-jobs:
-  lint:
-    name: Lint
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.13"
-
-      - name: Install linting tools
-        run: |
-          python -m pip install --upgrade pip
-          pip install ruff
-
-      - name: Run Ruff linter
-        run: ruff check .
-
-      - name: Run Ruff formatter check
-        run: ruff format --check .
-
-  test:
-    name: Test
-    runs-on: ubuntu-latest
-
-    services:
-      postgres:
-        image: postgres:18
-        env:
-          POSTGRES_USER: sportsclub
-          POSTGRES_PASSWORD: sportsclub
-          POSTGRES_DB: sportsclub
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd "pg_isready -U sportsclub"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.13"
-
-      - name: Cache pip dependencies
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
-      - name: Run migrations
-        working-directory: ./sportsclub
-        run: python manage.py migrate
-
-      - name: Run tests
-        working-directory: ./sportsclub
-        run: python manage.py test --verbosity=2
-
-  build:
-    name: Build Docker Image
-    runs-on: ubuntu-latest
-    needs: [lint, test]
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Build app image
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          file: docker/app/Dockerfile
-          push: false
-          tags: sportsclub-app:${{ github.sha }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-
-  integration:
-    name: Integration Test
-    runs-on: ubuntu-latest
-    needs: [lint, test]
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Create .env file
-        run: |
-          cat <<EOF > .env
-          SECRET_KEY=secret
-          DEBUG=False
-          ALLOWED_HOSTS=localhost,127.0.0.1
-          POSTGRES_USER=sportsclub
-          POSTGRES_PASSWORD=sportsclub
-          POSTGRES_DB=sportsclub
-          EOF
-
-      - name: Build and start services
-        run: docker compose up -d --build
-
-      - name: Wait for services to be healthy
-        run: |
-          echo "Waiting for services..."
-          sleep 30
-          docker compose ps
-
-      - name: Run migrations in container
-        run: |
-          docker compose exec -T app-blue python sportsclub/manage.py migrate
-
-      - name: Test API endpoint (blue)
-        run: |
-          curl -f http://localhost:8000/blue/api/v1/openapi.json || exit 1
-
-      - name: Test API endpoint (green)
-        run: |
-          curl -f http://localhost:8000/green/api/v1/openapi.json || exit 1
-
-      - name: Test main endpoint
-        run: |
-          curl -f http://localhost:8000/api/v1/openapi.json || exit 1
-
-      - name: Show logs on failure
-        if: failure()
-        run: docker compose logs
-
-      - name: Stop services
-        if: always()
-        run: docker compose down -v
-```
-
-This workflow has four jobs:
+This project includes a `.github/workflows/ci.yml` file that has four jobs:
 
 | Job         | Purpose                                 | Runs when              |
 |-------------|-----------------------------------------|------------------------|
@@ -1879,7 +1715,7 @@ This workflow has four jobs:
 | build       | Verify Docker image builds successfully | After lint & test pass |
 | integration | Start full stack and test API endpoints | After lint & test pass |
 
-Key features:
+Key features of this workflow:
 
 * PostgreSQL service container: GitHub Actions spins up a real PostgreSQL instance for tests
 * Dependency caching: Speeds up subsequent runs by caching pip packages
@@ -1887,3 +1723,16 @@ Key features:
 * Parallel execution: `build` and `integration` run in parallel after `lint` and `test`
 * Failure handling: Logs are shown if integration tests fail
 * Environment variables now match `.env.example` (except DEBUG=False for CI safety)
+
+## Ruff formatting
+
+Our first push to the Github repository will trigger the `ci.yml` workflow. We will be able to follow its execution via the `Actions` tab in our repository at Github. To make sure we do not get linting errors not caused by us, e.g., use of single quotes in strings instead of double quotes in files created by the `manage.py startapp` command, run these commands before pushing:
+
+```bash
+cd ~/Projects/sportsclub
+pip install ruff
+ruff check --fix .
+ruff format .
+```
+
+Review the changes made by `ruff check --fix` and `ruff format`, delete unnecessary files, such as the `views.py` file in each app, stage the changed files and commit them. Then push the commits.
