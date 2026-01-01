@@ -151,9 +151,6 @@ static_collected/
 # Media files (user uploads)
 media/
 
-# Docker
-docker/nginx/nginx.conf
-
 # Local development
 *.local
 notes.md
