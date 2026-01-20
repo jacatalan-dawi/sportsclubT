@@ -7,6 +7,7 @@ from django.contrib.auth import get_user_model
 from django.test import TestCase
 
 from core.models import Address
+from core.tests.conftest import TEST_USER_EMAIL, TEST_USER_PASSWORD, TEST_USER_USERNAME
 
 User = get_user_model()
 
@@ -17,7 +18,9 @@ class AuditoryModelTest(TestCase):
     def setUp(self):
         """Create a test user for auditory fields."""
         self.user = User.objects.create_user(
-            username="testuser", email="test@example.com", password="testpass123"
+            username=TEST_USER_USERNAME,
+            email=TEST_USER_EMAIL,
+            password=TEST_USER_PASSWORD,
         )
 
     def test_soft_delete(self):
