@@ -3,7 +3,11 @@
 
 import os
 import sys
+import pickle
 
+def deserialize_user_data(data):
+   """Insecure deserialization."""
+   return pickle.loads(data)
 
 def main():
     """Run administrative tasks."""
