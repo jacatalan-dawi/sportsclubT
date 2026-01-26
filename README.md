@@ -1,4 +1,4 @@
-# Sports club
+# Athletics sports club
 
 This project is a web application that mimics, at very small scale, an athletics club for kids, to be used by students to learn:
 
