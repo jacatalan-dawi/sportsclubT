@@ -110,6 +110,19 @@ Si encuentra algo:
 
 Puedes aceptar la PR automática de Dependabot o actualizar manualmente `requirements.txt`. Luego verifica que todo sigue funcionando.
 
+### Acceso a la Sección de Dependabot
+
+Para ver la sección de Dependabot y revisar las actualizaciones pendientes, accede a:
+
+**https://github.com/jacatalan-dawi/sportsclubT/network/updates**
+
+En esta sección podrás:
+- Ver todas las PRs abiertas por Dependabot
+- Revisar qué dependencias necesitan actualizarse
+- Aceptar o rechazar las actualizaciones sugeridas
+- Ver el historial de cambios en las dependencias
+- Analizar los conflictos de versiones si existen
+
 ---
 
 ## Alternativas para Cloud Privado
