@@ -123,6 +123,8 @@ En esta sección podrás:
 - Ver el historial de cambios en las dependencias
 - Analizar los conflictos de versiones si existen
 
+![Dependency Graph](https://github.com/jacatalan-dawi/sportsclubT/blob/Version-pinning-and-security-checks-of-dependencies/mediaJuan/DependencyGraph.png)
+
 ---
 
 ## Alternativas para Cloud Privado
