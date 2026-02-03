@@ -9,6 +9,7 @@
 6. [Proceso de Mejora del Archivo](#proceso-de-mejora-del-archivo)
 7. [Procedimiento Recomendado para Producción](#procedimiento-recomendado-para-producción)
 8. [Escenarios que se Previenen](#escenarios-que-se-previenen)
+9. [Implementación](#implementación)
 
 ---
 
@@ -458,3 +459,11 @@ El archivo `requirements.txt` mejorado, junto con la separación de dependencias
 4. **Trazabilidad**: Cambios documentados y versionados
 
 La combinación de **version pinning + hashing + separación dev/prod** representa las mejores prácticas actuales para la gestión de dependencias en proyectos Python de producción.
+
+---
+
+## Implementación
+
+Los cambios descritos en este documento se encuentran implementados en la rama `Version-pinning-and-security-checks-of-dependencies` del repositorio:
+
+🔗 [github.com/jacatalan-dawi/sportsclubT/tree/Version-pinning-and-security-checks-of-dependencies](https://github.com/jacatalan-dawi/sportsclubT/tree/Version-pinning-and-security-checks-of-dependencies)
