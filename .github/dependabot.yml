@@ -1,0 +1,122 @@
+# ============================================================================
+# Configuración de Dependabot para el proyecto Sports Club
+# ============================================================================
+# Este archivo configura las actualizaciones automáticas de dependencias
+# Documentación: https://docs.github.com/es/code-security/dependabot
+# ============================================================================
+
+version: 2
+
+updates:
+  # ─────────────────────────────────────────────────────────────────────────
+  # Configuración para dependencias de Python (pip)
+  # ─────────────────────────────────────────────────────────────────────────
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Europe/Madrid"
+    
+    # Límite de PRs abiertos simultáneamente
+    open-pull-requests-limit: 5
+    
+    # Etiquetas para los PRs
+    labels:
+      - "dependencies"
+      - "python"
+      - "security"
+    
+    # Prefijo para los mensajes de commit
+    commit-message:
+      prefix: "deps(python)"
+      include: "scope"
+    
+    # Agrupar actualizaciones relacionadas en un solo PR
+    groups:
+      django-ecosystem:
+        patterns:
+          - "django*"
+        update-types:
+          - "minor"
+          - "patch"
+      
+      pydantic-ecosystem:
+        patterns:
+          - "pydantic*"
+        update-types:
+          - "minor"
+          - "patch"
+      
+      psycopg-ecosystem:
+        patterns:
+          - "psycopg*"
+        update-types:
+          - "minor"
+          - "patch"
+    
+    # Ignorar actualizaciones mayores (requieren revisión manual)
+    ignore:
+      - dependency-name: "Django"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "pydantic"
+        update-types: ["version-update:semver-major"]
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # Configuración para GitHub Actions
+  # ─────────────────────────────────────────────────────────────────────────
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Europe/Madrid"
+    
+    labels:
+      - "dependencies"
+      - "github-actions"
+      - "ci"
+    
+    commit-message:
+      prefix: "ci(actions)"
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # Configuración para Docker
+  # ─────────────────────────────────────────────────────────────────────────
+  - package-ecosystem: "docker"
+    directory: "/docker/app"
+    schedule:
+      interval: "monthly"
+    
+    labels:
+      - "dependencies"
+      - "docker"
+    
+    commit-message:
+      prefix: "deps(docker)"
+
+  - package-ecosystem: "docker"
+    directory: "/docker/nginx"
+    schedule:
+      interval: "monthly"
+    
+    labels:
+      - "dependencies"
+      - "docker"
+    
+    commit-message:
+      prefix: "deps(docker)"
+
+  - package-ecosystem: "docker"
+    directory: "/docker/postgres"
+    schedule:
+      interval: "monthly"
+    
+    labels:
+      - "dependencies"
+      - "docker"
+    
+    commit-message:
+      prefix: "deps(docker)"

@@ -1,0 +1,15 @@
+# ============================================================================
+# DEPENDENCIAS DE DESARROLLO - Sports Club Application
+# ============================================================================
+# Este es el archivo de entrada para desarrollo. Ejecutar:
+#   pip-compile --generate-hashes requirements-dev.in -o requirements-dev.txt
+# ============================================================================
+
+# Incluir dependencias de producción
+-r requirements.in
+
+# Herramientas de linting y formateo
+ruff==0.14.10
+
+# Herramientas de seguridad
+pip-audit
