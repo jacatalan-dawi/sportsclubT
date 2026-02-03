@@ -3,9 +3,9 @@ name: CI
 
 on:
   push:
-    branches: [main, develop]
+    branches: [main, Version-pinning-and-security-checks-of-dependencies]
   pull_request:
-    branches: [main, develop]
+    branches: [main, Version-pinning-and-security-checks-of-dependencies]
 
 env:
   # Django
