@@ -15,7 +15,7 @@ django-ninja==1.5.1
 django-ratelimit==4.1.0
 
 # Base de datos PostgreSQL
-psycopg[binary,pool]==3.3.1
+psycopg[binary,pool]==3.3.2
 
 # Validación y tipado
 pydantic==2.12.5
