@@ -151,9 +151,9 @@ defusedxml==0.7.1 \
     --hash=sha256:1bb3032db185915b62d7c6209c5a8792be6a32ab2fedacc84e01b52c51aa3e69 \
     --hash=sha256:a352e7e428770286cc899e2542b6cdaedb2b4953ff269a210103ec58f6198a61
     # via py-serializable
-django==6.0 \
-    --hash=sha256:1cc2c7344303bbfb7ba5070487c17f7fc0b7174bbb0a38cebf03c675f5f19b6d \
-    --hash=sha256:7b0c1f50c0759bbe6331c6a39c89ae022a84672674aeda908784617ef47d8e26
+django==6.0.2 \
+    --hash=sha256:3046a53b0e40d4b676c3b774c73411d7184ae2745fe8ce5e45c0f33d3ddb71a7 \
+    --hash=sha256:610dd3b13d15ec3f1e1d257caedd751db8033c5ad8ea0e2d1219a8acf446ecc6
     # via
     #   -r requirements.in
     #   django-cors-headers
@@ -163,21 +163,21 @@ django-cors-headers==4.9.0 \
     --hash=sha256:15c7f20727f90044dcee2216a9fd7303741a864865f0c3657e28b7056f61b449 \
     --hash=sha256:fe5d7cb59fdc2c8c646ce84b727ac2bca8912a247e6e68e1fb507372178e59e8
     # via -r requirements.in
-django-environ==0.12.0 \
-    --hash=sha256:227dc891453dd5bde769c3449cf4a74b6f2ee8f7ab2361c93a07068f4179041a \
-    --hash=sha256:92fb346a158abda07ffe6eb23135ce92843af06ecf8753f43adf9d2366dcc0ca
+django-environ==0.12.1 \
+    --hash=sha256:064ba2d5082f833e6d7fe4def4928bde1eedc0248a417575da7db147aeec1c20 \
+    --hash=sha256:22859c6e905ab7637fa3348d1787543bb4492f38d761104a3ce0519b7b752845
     # via -r requirements.in
-django-json-widget==2.1.0 \
-    --hash=sha256:0f040b8b329d5032dc1136cf50c01dc7563a07b8f0c3f5324b9051bc3e6eaa83 \
-    --hash=sha256:fc30781292000c745449632d0f2d6ddd8f2415172664ae9fad42f1cd407a5612
+django-json-widget==2.1.1 \
+    --hash=sha256:2fa3d6fb6dba9436a29ad2cee23fa794381f54a6678ec7d74e990ae081d9800b \
+    --hash=sha256:dc8102e2fa9accd0f661ea1988c9389f8fbbcb8a4bb9cbfb8fa0525b3c1265c1
     # via -r requirements.in
-django-nanoid-field==0.1.4 \
-    --hash=sha256:1c55d8c308d609dfe62ac9e4a1482eb9f7642997852a920b827748e660577b6e \
-    --hash=sha256:df453208733c29f4af295f4fdd74ccc18d3203e4ac2cb0267ef0ba93f09140c2
+django-nanoid-field==0.1.5 \
+    --hash=sha256:c83269ae24d06e3099bedbc180fa8517b310e10727ba5a3d844d99daf2e5df2f \
+    --hash=sha256:dd52887676d7fd1a0ec9e3510d8871235fec7cc28f0b3dcb5bd37ab2efa09fdd
     # via -r requirements.in
-django-ninja==1.5.1 \
-    --hash=sha256:135aaa1117dce8dfd7a1e80b4487a8cccee3a4182c3c8b562d08ea94e4d2cbdf \
-    --hash=sha256:6acda68a64d60934c6fdccb4d97c3ac7f02cfefd78a5d87ae053effe081b17c7
+django-ninja==1.5.3 \
+    --hash=sha256:0a6ead5b4e57ec1050b584eb6f36f105f256b8f4ac70d12e774d8b6dd91e2198 \
+    --hash=sha256:974803944965ad0566071633ffd4999a956f2ad1ecbed815c0de37c1c969592b
     # via -r requirements.in
 django-ratelimit==4.1.0 \
     --hash=sha256:555943b283045b917ad59f196829530d63be2a39adb72788d985b90c81ba808b \
