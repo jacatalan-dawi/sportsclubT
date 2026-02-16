@@ -9,7 +9,7 @@
 -r requirements.in
 
 # Herramientas de linting y formateo
-ruff==0.14.10
+ruff==0.15.1
 
 # Herramientas de seguridad
 pip-audit
